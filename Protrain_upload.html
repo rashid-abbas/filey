@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<!--Protrain File Upload Facilitator --> 
+<html>
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+ <title>File Upload </title>
+ <h2> Upload Files </h2>
+ <!-- <style>
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #111;
+}
+
+.active {
+  background-color: #4CAF50;
+}
+</style> -->
+</head>
+    <body>
+	
+	<p> You may attach any file including images that you wish learners to view. 
+	This is quite useful for printed quizes, stencil or image based quiz assignments.</p>
+        
+		<input type="file" id="fileButton"/>
+	List of the File uploaded.
+	<p id ="myurl">	</p>
+	urls of the file uploaded.
+	<p id ="fileurl"> </p>
+	<img id ="myimg"> </img>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-storage.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDlYT11DXxcjWs9VlxYe6FneJ2292IhlaM",
+    authDomain: "virtuedu-a959b.firebaseapp.com",
+    databaseURL: "https://virtuedu-a959b.firebaseio.com",
+    projectId: "virtuedu-a959b",
+    storageBucket: "virtuedu-a959b.appspot.com",
+    messagingSenderId: "638258643431",
+    appId: "1:638258643431:web:b8adaefe8703997dbf3d42",
+    measurementId: "G-B5KDCERMV9"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
+
+<script>
+            var fileButton = document.getElementById("fileButton");
+            fileButton.addEventListener('change', function(e){
+                var file = e.target.files[0];
+				var storageRef = firebase.storage().ref(file.name);
+				var uploadTask = storageRef.put(file);
+												
+				//var uploadedFilesDisplay = document.getElementById("myurl").innerHTML;
+				//var uploadedDocList = [uploadedFilesDisplay];
+				//uploadedDocList.push(file.name);
+				document.getElementById("myurl").innerHTML = file.name;
+				
+            //});  
+
+
+			// Create a reference to the file we want to download
+			
+			var starsRef = storageRef;
+
+			// Get the download URL
+			starsRef.getDownloadURL().then(function(url) {
+			  // Insert url into an <img> tag to "download"
+			  // Or inserted into an <p> element for copying:
+			  document.getElementById("fileurl").innerHTML = url;
+			  //var img = document.getElementById('myimg');
+			 // img.src =url;
+			});
+			
+			});
+			
+			
+</Script>
+
+	</body>
+</html>
